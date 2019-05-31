@@ -39,7 +39,9 @@ Please see the notebook.
 
 ## Hypothesis Tests and results
 H0: The single male and the single female who are dating have the same probability to smoke.
+
 H1: The single male are more likely to smoke than the single female.
+
 
 H0: p_m - p_f = 0
 
