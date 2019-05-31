@@ -34,22 +34,27 @@ The hypothesis test is based on the findings from smoke data, aiming to prove th
 
 ## Data Visualizations
 
-
+Please see the notebook.
 
 
 ## Hypothesis Tests and results
-$H_0$: The single male and the single female who are dating have the same probability to smoke.
+H0: The single male and the single female who are dating have the same probability to smoke.
+H1: The single male are more likely to smoke than the single female.
 
-$H_1$: The single male are more likely to smoke than the single female.
+H0: p_m - p_f = 0
+H1: p_m - p_f > 0
 
+## Conclusion
+1. There is difference in many aspects between the single male and single female. 🤪
+2. A lot of single men are good at frisbee... (really?) 😆
+3. Both of them think they are good at cooking. 🤨
+4. Gay men have a much higher percentage of drug users than lesbians. 😱
+5. Since we rejected the H0, we can say the single male are more likely to smoke than the single female. 🤔
 
-$$ p_m = P(\text{the male smoke}) $$
-$$ p_f = P(\text{the female smoke}) $$
-
-
-$$ H_0: \ p_m - p_f = 0 $$
-
-$$ H_1: \ p_m - p_f > 0$$
+## Next Step
+1. Plot more and dig out more fun facts. 
+2. Natural Language Processing based on their introduction essays. 
+3. Recommender system based on the user features. 
 
 
 ## Contact
