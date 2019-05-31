@@ -6,6 +6,9 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import nltk, re, pprint
 from nltk import word_tokenize
 
+import matplotlib.pyplot as plt
+%matplotlib inline
+
 def clean_text(text):
     '''
     clean the text data: split the text, remove the redundant signs and words.
@@ -52,7 +55,7 @@ def count_words(text):
     df = df.sort_values(by='count', ascending=False)
     return df
 
-def generate_wordcloud(words, mask, STOPWORDS):
+def generate_wordcloud(words, mask, STOPWORDS=['']):
     word_cloud = WordCloud(width = 512, height = 512, background_color='white', stopwords=STOPWORDS, mask=mask).generate(words)
     plt.figure(figsize=(10,8),facecolor = 'white', edgecolor='blue')
     plt.imshow(word_cloud)
