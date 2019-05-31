@@ -42,6 +42,7 @@ H0: The single male and the single female who are dating have the same probabili
 H1: The single male are more likely to smoke than the single female.
 
 H0: p_m - p_f = 0
+
 H1: p_m - p_f > 0
 
 ## Conclusion
