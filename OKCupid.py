@@ -5,15 +5,6 @@ from PIL import Image
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import nltk, re, pprint
 from nltk import word_tokenize
-import seaborn as sns
-from pygeocoder import Geocoder
-import gmaps
-import gmaps.datasets
-gmaps.configure(api_key="AIzaSyCr7VthVl0P5-f-tGEv2zxRfxa3lI2z3Uk")
-
-import matplotlib.pyplot as plt
-%matplotlib inline
-sns.set(style="ticks", color_codes=True)
 
 def clean_text(text):
     '''
@@ -43,16 +34,25 @@ def get_coordinates(address):
     result = Geocoder('AIzaSyCr7VthVl0P5-f-tGEv2zxRfxa3lI2z3Uk').geocode(str(address))
     return result.coordinates
 
-
-def get_coordinates(address):
+def count_words(text):
     '''
-    get the longitude and latitude of the address
+    count the frequency of the words in a string, and return a DataFrame.
+    The input should be a string with english words.
+    The output is a dataframe with words and the counts.
     '''
-    result = Geocoder('AIzaSyCr7VthVl0P5-f-tGEv2zxRfxa3lI2z3Uk').geocode(str(address))
-    return result.coordinates
+    lst = text.split(' ')
+    set_ = set(lst)
 
+    count = []
+    for x in set_:
+        n = lst.count(x)
+        count.append(n)
 
-def generate_wordcloud(words, mask):
+    df = pd.DataFrame(data = list(zip(lst, count)), columns = ['word', 'count'])
+    df = df.sort_values(by='count', ascending=False)
+    return df
+
+def generate_wordcloud(words, mask, STOPWORDS):
     word_cloud = WordCloud(width = 512, height = 512, background_color='white', stopwords=STOPWORDS, mask=mask).generate(words)
     plt.figure(figsize=(10,8),facecolor = 'white', edgecolor='blue')
     plt.imshow(word_cloud)
