@@ -7,7 +7,6 @@ import nltk, re, pprint
 from nltk import word_tokenize
 
 import matplotlib.pyplot as plt
-%matplotlib inline
 
 def clean_text(text):
     '''
@@ -29,14 +28,6 @@ def clean_text_column(df, col_name):
     df_ = df[df[col_name].notnull()]
     df[col_name] = df_.apply(lambda row: clean_text(row[col_name]), axis = 1)
 
-
-def get_coordinates(address):
-    '''
-    transform the physical address into longitude and latitude.
-    '''
-    result = Geocoder('AIzaSyCr7VthVl0P5-f-tGEv2zxRfxa3lI2z3Uk').geocode(str(address))
-    return result.coordinates
-
 def count_words(text):
     '''
     count the frequency of the words in a string, and return a DataFrame.
@@ -55,10 +46,42 @@ def count_words(text):
     df = df.sort_values(by='count', ascending=False)
     return df
 
-def generate_wordcloud(words, mask, STOPWORDS=['']):
-    word_cloud = WordCloud(width = 512, height = 512, background_color='white', stopwords=STOPWORDS, mask=mask).generate(words)
+def generate_wordcloud(words, mask=None, STOPWORDS=['']):
+    word_cloud = WordCloud(width = 2000, height = 300, background_color='white', stopwords=STOPWORDS, mask=mask).generate(words)
     plt.figure(figsize=(10,8),facecolor = 'white', edgecolor='blue')
     plt.imshow(word_cloud)
     plt.axis('off')
     plt.tight_layout(pad=0)
     plt.show()
+
+def plot_word_frequency(word_count1, word_count2, title='Don\'t forget your title gurl~'):
+    """
+    For plotting male and female word count use.
+    Word_count1 is male word count, word_count2 is female.
+    """
+    fig, ax = plt.subplots(2, 1, figsize=(20, 15))
+
+    x1 = np.arange(word_count1.shape[0])
+    x2 = np.arange(word_count2.shape[0])
+    widTh = 0.6
+
+    ax[0].bar(x1, word_count1['count'],
+              color='#3462BF', width=widTh, label='Male')
+    ax[0].set_xticks(x1)
+    ax[0].set_xticklabels(word_count1['word'], rotation=45,
+                          fontsize=18, weight='bold', ha='right')
+    ax[0].set_ylabel("Count", fontsize=18, weight='bold')
+    ax[0].legend()
+
+    ax[1].bar(x2, word_count2['count'], color='#F23D6D',
+              width=widTh, label='Female')
+    ax[1].set_xticks(x2)
+    ax[1].set_xticklabels(word_count2['word'], rotation=45,
+                          fontsize=18, weight='bold', ha='right')
+    ax[1].set_xlabel("Frequent Words", fontsize=18, weight='bold')
+    ax[1].set_ylabel("Count", fontsize=18, weight='bold')
+
+    ax[1].legend()
+
+    _ = ax[0].set_title(title, fontsize = 25, weight='bold')
+    plt.tight_layout()
