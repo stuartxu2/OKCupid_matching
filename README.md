@@ -1,4 +1,4 @@
-# OKCupid_EDA
+# OKCupid_matching
 This project is the first part of the Capstone Project from [Galvanize Data Science Immersive](https://www.galvanize.com). 
 
 #### -- Project Status: [Active]
